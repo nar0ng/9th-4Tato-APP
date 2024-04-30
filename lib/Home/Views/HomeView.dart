@@ -1,4 +1,4 @@
-import 'package:cotato4cut_narong/Onboarding/Views/OnboardingView.dart';
+import 'package:cotato4cut/Onboarding/Views/OnboardingView.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
