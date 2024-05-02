@@ -2,15 +2,16 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'ResultView.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class Camera extends StatefulWidget {
-  const Camera({super.key});
+class CameraView extends StatefulWidget {
+  const CameraView({Key? key});
 
   @override
   _CameraState createState() => _CameraState();
 }
 
-class _CameraState extends State<Camera> {
+class _CameraState extends State<CameraView> {
   CameraController? _controller;
   List<CameraDescription>? _cameras;
   bool _isReady = false;
@@ -25,12 +26,19 @@ class _CameraState extends State<Camera> {
     _initializeCamera();
   }
 
-  //카메라 초기화
+  // 카메라 초기화 및 권한 요청
   Future<void> _initializeCamera() async {
-    _cameras = await availableCameras();
+    // 카메라 권한 확인 및 요청
+    var status = await Permission.camera.request();
+    if (!status.isGranted) {
+      // 권한이 거부된 경우 처리
+      return;
+    }
 
+    // 카메라 초기화
+    _cameras = await availableCameras();
     if (_cameras != null && _cameras!.isNotEmpty) {
-      _controller = CameraController(_cameras![1], ResolutionPreset.high);
+      _controller = CameraController(_cameras![0], ResolutionPreset.high);
       await _controller!.initialize();
 
       setState(() {

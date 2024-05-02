@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cotato4cut/Camera/CameraView.dart';
 
 class OnboardingView extends StatefulWidget{
   @override
@@ -38,7 +39,12 @@ class _OnboardingViewState extends State<OnboardingView>{
               ),
             ),
             ElevatedButton(
-                onPressed: () {  },
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CameraView()),
+                  );
+                   },
                 child: const Text('다음 단계'))
           ],
         ),

@@ -3,7 +3,7 @@ import 'Home/Views/HomeView.dart';
 import 'Camera/CameraView.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: Camera(),
+  runApp(const MaterialApp(
+    home: HomeView(),
   ));
 }
